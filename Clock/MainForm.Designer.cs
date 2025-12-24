@@ -33,6 +33,7 @@
 			this.labelTime = new System.Windows.Forms.Label();
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiTopmost = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiShowControls = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsmiShowDate = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiShowWeekday = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,6 @@
 			this.tsmiAutoStart = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsmiQuit = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiShowControls = new System.Windows.Forms.ToolStripMenuItem();
 			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.cbShowDate = new System.Windows.Forms.CheckBox();
 			this.cbShowWeekday = new System.Windows.Forms.CheckBox();
@@ -69,6 +69,7 @@
 			this.labelTime.Size = new System.Drawing.Size(261, 51);
 			this.labelTime.TabIndex = 0;
 			this.labelTime.Text = "CurrentTime";
+			this.labelTime.Click += new System.EventHandler(this.labelTime_Click);
 			// 
 			// contextMenuStrip
 			// 
@@ -99,6 +100,14 @@
 			this.tsmiTopmost.Size = new System.Drawing.Size(180, 22);
 			this.tsmiTopmost.Text = "Topmost";
 			this.tsmiTopmost.Click += new System.EventHandler(this.tsmiTopmost_Click);
+			// 
+			// tsmiShowControls
+			// 
+			this.tsmiShowControls.CheckOnClick = true;
+			this.tsmiShowControls.Name = "tsmiShowControls";
+			this.tsmiShowControls.Size = new System.Drawing.Size(180, 22);
+			this.tsmiShowControls.Text = "Show controls";
+			this.tsmiShowControls.CheckedChanged += new System.EventHandler(this.tsmiShowControls_CheckedChanged);
 			// 
 			// toolStripSeparator1
 			// 
@@ -158,12 +167,14 @@
 			this.tsmiForegroundColor.Name = "tsmiForegroundColor";
 			this.tsmiForegroundColor.Size = new System.Drawing.Size(180, 22);
 			this.tsmiForegroundColor.Text = "Foreground color";
+			this.tsmiForegroundColor.Click += new System.EventHandler(this.tsmiForegroundColor_Click);
 			// 
 			// tsmiBackgroundColor
 			// 
 			this.tsmiBackgroundColor.Name = "tsmiBackgroundColor";
 			this.tsmiBackgroundColor.Size = new System.Drawing.Size(180, 22);
 			this.tsmiBackgroundColor.Text = "Background color";
+			this.tsmiBackgroundColor.Click += new System.EventHandler(this.tsmiBackgroundColor_Click);
 			// 
 			// toolStripSeparator4
 			// 
@@ -199,14 +210,6 @@
 			this.tsmiQuit.Size = new System.Drawing.Size(180, 22);
 			this.tsmiQuit.Text = "Quit";
 			this.tsmiQuit.CheckedChanged += new System.EventHandler(this.tsmiQuit_CheckedChanged);
-			// 
-			// tsmiShowControls
-			// 
-			this.tsmiShowControls.CheckOnClick = true;
-			this.tsmiShowControls.Name = "tsmiShowControls";
-			this.tsmiShowControls.Size = new System.Drawing.Size(180, 22);
-			this.tsmiShowControls.Text = "Show controls";
-			this.tsmiShowControls.CheckedChanged += new System.EventHandler(this.tsmiShowControls_CheckedChanged);
 			// 
 			// timer
 			// 
