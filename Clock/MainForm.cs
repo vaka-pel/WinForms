@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace Clock
 {
@@ -21,8 +22,8 @@ namespace Clock
 			this.StartPosition = FormStartPosition.Manual;
 			this.Location = new Point
 				(
-				Screen.PrimaryScreen.Bounds.Width - this.Width,
-				50
+					Screen.PrimaryScreen.Bounds.Width - this.Width,
+					50
 				);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -38,24 +39,18 @@ namespace Clock
 			cbShowWeekday.Visible = visible;
 			btnHideControls.Visible = visible;
 			this.ShowInTaskbar = visible;
-			this.FormBorderStyle = visible ? FormBorderStyle:FormBorderStyle.None;
+			this.FormBorderStyle = visible ? FormBorderStyle.FixedSingle : FormBorderStyle.None;
 			this.TransparencyKey = visible ? Color.Empty : this.BackColor;
 		}
-		private void MainForm_Load(object sender, EventArgs e)
-		{
-
-		}
-
 		private void timer_Tick(object sender, EventArgs e)
 		{
 			labelTime.Text = DateTime.Now.ToString
 				(
-				"HH:mm:ss"
+				"hh:mm:ss tt",
+				System.Globalization.CultureInfo.InvariantCulture
 				);
 			if (cbShowDate.Checked)
-
 				labelTime.Text += $"\n{DateTime.Now.ToString("yyyy.MM.dd")}";
-
 			if (cbShowWeekday.Checked)
 				labelTime.Text += $"\n{DateTime.Now.DayOfWeek}";
 
@@ -65,7 +60,6 @@ namespace Clock
 		private void btnHideControls_Click(object sender, EventArgs e)
 		{
 			SetVisibility(tsmiShowControls.Checked = false);
-			
 		}
 
 		//private void labelTime_MouseHover(object sender, EventArgs e)
@@ -82,64 +76,61 @@ namespace Clock
 			}
 		}
 
-		private void tsmiTopmost_Click(object sender, EventArgs e)
-		{
-			this.TopMost = tsmiTopmost.Checked;
-		}
+		private void tsmiTopmost_Click(object sender, EventArgs e) => this.TopMost = tsmiTopmost.Checked;
 
 		private void tsmiShowControls_CheckedChanged(object sender, EventArgs e)
 		{
 			SetVisibility((sender as ToolStripMenuItem).Checked);
-			// Sender -  отправитель события ( Control, который прислал событие) .
-			// Если на элемент окна (Control) воздействует пользователь при помощи клавиатуры или мыши,
-			// этот Control  отправляет событие своему родителю, 
-			// а родитель может обрабатывать, или не обрабатывать это событие.
+			//Sender - это отправитель события (Control, который прислал событие).
+			//Если на элемент окна (Control) воздействует пользователь при помощи клавиатуры или мыши,
+			//этот Control отправляет событие свему родителю,
+			//а родитель может обраьатывать, или не обрабатывать это событие.
 		}
 
-		private void tsmiShowDate_CheckedChanged(object sender, EventArgs e) =>
-			cbShowDate.Checked = tsmiShowDate.Checked;
+		private void tsmiShowDate_CheckedChanged(object sender, EventArgs e) => cbShowDate.Checked = tsmiShowDate.Checked;
 
-		private void cbShowDate_CheckedChanged(object sender, EventArgs e) =>
-			tsmiShowDate.Checked = cbShowDate.Checked;
+		private void cbShowDate_CheckedChanged(object sender, EventArgs e) => tsmiShowDate.Checked = cbShowDate.Checked;
 
-		private void tsmiShowWeekday_CheckedChanged(object sender, EventArgs e) =>
-			cbShowWeekday.Checked = tsmiShowWeekday.Checked;
+		private void tsmiShowWeekday_CheckedChanged(object sender, EventArgs e) => cbShowWeekday.Checked = tsmiShowWeekday.Checked;
 
-		private void cbShowWeekday_CheckedChanged(object sender, EventArgs e) =>
-			tsmiShowWeekday.Checked = cbShowWeekday.Checked;
+		private void cbShowWeekday_CheckedChanged(object sender, EventArgs e) => tsmiShowWeekday.Checked = cbShowWeekday.Checked;
 
-		private void tsmiQuit_CheckedChanged(object sender, EventArgs e) => this.Close();
-
-		private void labelTime_Click(object sender, EventArgs e)
-		{
-
-		}
+		private void tsmiQuit_Click(object sender, EventArgs e) => this.Close();
 
 		private void tsmiForegroundColor_Click(object sender, EventArgs e)
 		{
 			DialogResult result = foregroundColorDialog.ShowDialog();
-			if(result == DialogResult.OK) 
-			labelTime.ForeColor = foregroundColorDialog.Color;
+			if (result == DialogResult.OK)
+				labelTime.ForeColor = foregroundColorDialog.Color;
 		}
 
 		private void tsmiBackgroundColor_Click(object sender, EventArgs e)
 		{
 			DialogResult result = backgroundColorDialog.ShowDialog();
-			if(result == DialogResult.OK)
-			labelTime.BackColor = backgroundColorDialog.Color;
+			if (result == DialogResult.OK)
+				labelTime.BackColor = backgroundColorDialog.Color;
 		}
 
 		private void tsmiFont_Click(object sender, EventArgs e)
 		{
 			fontDialog.Location = new Point
 				(
-				this.Location.X - fontDialog.Width - 10,
-				this.Location.Y
+					this.Location.X - fontDialog.Width - 10,
+					this.Location.Y
 				);
 			fontDialog.Font = labelTime.Font;
 			DialogResult result = fontDialog.ShowDialog();
-			if(result == DialogResult.OK)
+			if (result == DialogResult.OK)
 				labelTime.Font = fontDialog.Font;
+		}
+
+		private void tsmiAutoStart_CheckedChanged(object sender, EventArgs e)
+		{
+			string key_name = "ClockPV_521";
+			RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);    //true - открыть ветку на запись
+			if (tsmiAutoStart.Checked) rk.SetValue(key_name, Application.ExecutablePath);
+			else rk.DeleteValue(key_name, false);   //false - не бросать исключение, если данная запись отсутствует в реестре.
+			rk.Dispose();
 		}
 	}
 }

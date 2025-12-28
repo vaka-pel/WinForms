@@ -14,26 +14,20 @@ namespace Clock
 {
 	public partial class FontDialog : Form
 	{
-		public Font Font {  get; set; }
+		public Font Font { get; set; }
+		int lastChosenIndex;
 		public FontDialog()
 		{
 			InitializeComponent();
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void buttonOK_Click(object sender, EventArgs e)
-		{
-			this.Font = labelExample.Font;
+			lastChosenIndex = 0;
+			LoadFonts("*.ttf");
+			LoadFonts("*.otf");
+			comboBoxFont.SelectedIndex = 1;
 		}
 
 		private void FontDialog_Load(object sender, EventArgs e)
 		{
-			LoadFonts("*.ttf");
-			LoadFonts("*.otf");
+			numericUpDownFontSize.Value = (decimal)Font.Size;
 		}
 		void LoadFonts(string extension)
 		{
@@ -41,18 +35,19 @@ namespace Clock
 			Directory.SetCurrentDirectory($"{currentDir}\\..\\..\\..\\Fonts");
 			//MessageBox.Show
 			//	(
-			//	this,
-			//	//currentDir,
-			//	Directory.GetCurrentDirectory(),
-			//	"CurrentDirectory",
-			//	MessageBoxButtons.OK,
+			//	this, 
+			//	//currentDir, 
+			//	Directory.GetCurrentDirectory(), 
+			//	"CurrentDirectory", 
+			//	MessageBoxButtons.OK, 
 			//	MessageBoxIcon.Information
 			//	);
-			string[] files = Directory.GetFiles( Directory.GetCurrentDirectory(), extension);
-			//comboBoxFont.Items.AddRange(files); // добавляем все содержимое массива files в выпадающий список
+
+			string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), extension);
+			//comboBoxFont.Items.AddRange(files);	//добавляем все содержимое массива 'files' в выпадающий список
 			for (int i = 0; i < files.Length; i++)
 			{
-				comboBoxFont.Items.Add( files[i].Split('\\').Last() );
+				comboBoxFont.Items.Add(files[i].Split('\\').Last());
 			}
 		}
 
@@ -62,14 +57,32 @@ namespace Clock
 			info += $"\nItem:\t{comboBoxFont.SelectedItem}";
 			info += $"\nText:\t{comboBoxFont.SelectedText}";
 			info += $"\nValue:\t{comboBoxFont.SelectedValue}";
-			//MessageBox.Show(this, info, "SelectedIndexChanged", MessageBoxButtons.OK, MessageBoxIcon.Information );
-			SetFont(comboBoxFont.SelectedItem.ToString());
+			//MessageBox.Show(this, info, "SelectedIndexChanged", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			SetFont();
 		}
-		void SetFont(string filename)
+		void SetFont()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection();
-			pfc.AddFontFile(filename);
-			labelExample.Font = new Font(pfc.Families[0], 32);
+			pfc.AddFontFile(comboBoxFont.SelectedItem.ToString());
+			labelExample.Font = new Font(pfc.Families[0], (float)
+				numericUpDownFontSize.Value);
+		}
+
+		private void buttonOK_Click(object sender, EventArgs e)
+		{
+			this.Font = labelExample.Font;
+			this.lastChosenIndex = comboBoxFont.SelectedIndex;
+		}
+
+		private void buttonCancel_Click(object sender, EventArgs e)
+		{
+			labelExample.Font = this.Font;
+			comboBoxFont.SelectedIndex = lastChosenIndex;
+		}
+
+		private void numericUpDownFontSize_ValueChanged(object sender, EventArgs e)
+		{
+			SetFont();
 		}
 	}
 }
