@@ -132,5 +132,7 @@ namespace Clock
 			else rk.DeleteValue(key_name, false);   //false - не бросать исключение, если данная запись отсутствует в реестре.
 			rk.Dispose();
 		}
+
+		
 	}
 }
