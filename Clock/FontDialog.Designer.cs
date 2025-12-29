@@ -80,6 +80,7 @@
 			// 
 			// numericUpDownFontSize
 			// 
+			this.numericUpDownFontSize.Enabled = false;
 			this.numericUpDownFontSize.Location = new System.Drawing.Point(453, 23);
 			this.numericUpDownFontSize.Maximum = new decimal(new int[] {
             60,

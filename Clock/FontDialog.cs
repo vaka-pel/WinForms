@@ -15,6 +15,7 @@ namespace Clock
 	public partial class FontDialog : Form
 	{
 		public Font Font { get; set; }
+		public string Filename { get; set; }
 		int lastChosenIndex;
 		public FontDialog()
 		{
@@ -23,6 +24,16 @@ namespace Clock
 			LoadFonts("*.ttf");
 			LoadFonts("*.otf");
 			comboBoxFont.SelectedIndex = 1;
+		}
+		public FontDialog(string font_name, string font_size) : this()
+		{
+			Filename = font_name;
+			if(font_size != null)numericUpDownFontSize.Value = Convert.ToDecimal(font_size);
+			lastChosenIndex = comboBoxFont.FindString(font_name);
+			if (lastChosenIndex == -1) lastChosenIndex = 2;
+			comboBoxFont.SelectedIndex = lastChosenIndex;
+			SetFont();
+			Font = labelExample.Font;
 		}
 
 		private void FontDialog_Load(object sender, EventArgs e)
@@ -62,15 +73,17 @@ namespace Clock
 		}
 		void SetFont()
 		{
+			Directory.SetCurrentDirectory($"{Application.ExecutablePath}\\..\\..\\..\\Fonts");
+			//MessageBox.Show(this,Directory.GetCurrentDirectory(),"FontDialog",MessageBoxButtons.OK,MessageBoxIcon.Information);
 			PrivateFontCollection pfc = new PrivateFontCollection();
 			pfc.AddFontFile(comboBoxFont.SelectedItem.ToString());
-			labelExample.Font = new Font(pfc.Families[0], (float)
-				numericUpDownFontSize.Value);
+			labelExample.Font = new Font(pfc.Families[0], (float)numericUpDownFontSize.Value);
 		}
 
 		private void buttonOK_Click(object sender, EventArgs e)
 		{
 			this.Font = labelExample.Font;
+			this.Filename = comboBoxFont.SelectedItem.ToString();
 			this.lastChosenIndex = comboBoxFont.SelectedIndex;
 		}
 
