@@ -81,6 +81,7 @@
 			// numericUpDownFontSize
 			// 
 			this.numericUpDownFontSize.Enabled = false;
+			this.numericUpDownFontSize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.numericUpDownFontSize.Location = new System.Drawing.Point(453, 23);
 			this.numericUpDownFontSize.Maximum = new decimal(new int[] {
             60,
@@ -96,7 +97,7 @@
 			this.numericUpDownFontSize.Size = new System.Drawing.Size(75, 20);
 			this.numericUpDownFontSize.TabIndex = 4;
 			this.numericUpDownFontSize.Value = new decimal(new int[] {
-            32,
+            22,
             0,
             0,
             0});

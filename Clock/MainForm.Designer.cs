@@ -65,7 +65,7 @@
 			this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelTime.Location = new System.Drawing.Point(13, 13);
 			this.labelTime.Name = "labelTime";
-			this.labelTime.Size = new System.Drawing.Size(261, 51);
+			this.labelTime.Size = new System.Drawing.Size(261, 70);
 			this.labelTime.TabIndex = 0;
 			this.labelTime.Text = "CurrentTime";
 			// 
