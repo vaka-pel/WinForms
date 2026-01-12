@@ -33,6 +33,10 @@
 			this.checkBoxUseDate = new System.Windows.Forms.CheckBox();
 			this.labelWeekdays = new System.Windows.Forms.Label();
 			this.clbWeekDays = new System.Windows.Forms.CheckedListBox();
+			this.labelFileName = new System.Windows.Forms.Label();
+			this.buttonAdd = new System.Windows.Forms.Button();
+			this.buttonOK = new System.Windows.Forms.Button();
+			this.buttonCancel = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// dtpDate
@@ -42,7 +46,7 @@
 			this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dtpDate.Location = new System.Drawing.Point(12, 35);
 			this.dtpDate.Name = "dtpDate";
-			this.dtpDate.Size = new System.Drawing.Size(152, 31);
+			this.dtpDate.Size = new System.Drawing.Size(177, 31);
 			this.dtpDate.TabIndex = 0;
 			// 
 			// dtpTime
@@ -50,9 +54,9 @@
 			this.dtpTime.CustomFormat = "HH:mm:ss";
 			this.dtpTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dtpTime.Location = new System.Drawing.Point(170, 35);
+			this.dtpTime.Location = new System.Drawing.Point(255, 35);
 			this.dtpTime.Name = "dtpTime";
-			this.dtpTime.Size = new System.Drawing.Size(152, 31);
+			this.dtpTime.Size = new System.Drawing.Size(170, 31);
 			this.dtpTime.TabIndex = 1;
 			// 
 			// checkBoxUseDate
@@ -79,7 +83,9 @@
 			// 
 			// clbWeekDays
 			// 
-			this.clbWeekDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.clbWeekDays.CheckOnClick = true;
+			this.clbWeekDays.ColumnWidth = 58;
+			this.clbWeekDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.clbWeekDays.FormattingEnabled = true;
 			this.clbWeekDays.Items.AddRange(new object[] {
             "Пн",
@@ -89,21 +95,66 @@
             "Пт",
             "Сб",
             "Вс"});
-			this.clbWeekDays.Location = new System.Drawing.Point(27, 109);
+			this.clbWeekDays.Location = new System.Drawing.Point(12, 109);
+			this.clbWeekDays.MultiColumn = true;
 			this.clbWeekDays.Name = "clbWeekDays";
-			this.clbWeekDays.Size = new System.Drawing.Size(120, 123);
+			this.clbWeekDays.Size = new System.Drawing.Size(413, 25);
 			this.clbWeekDays.TabIndex = 4;
+			// 
+			// labelFileName
+			// 
+			this.labelFileName.AutoSize = true;
+			this.labelFileName.Location = new System.Drawing.Point(12, 151);
+			this.labelFileName.Name = "labelFileName";
+			this.labelFileName.Size = new System.Drawing.Size(56, 13);
+			this.labelFileName.TabIndex = 5;
+			this.labelFileName.Text = "Falename:";
+			// 
+			// buttonAdd
+			// 
+			this.buttonAdd.Location = new System.Drawing.Point(12, 188);
+			this.buttonAdd.Name = "buttonAdd";
+			this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+			this.buttonAdd.TabIndex = 6;
+			this.buttonAdd.Text = "Добавить";
+			this.buttonAdd.UseVisualStyleBackColor = true;
+			this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+			// 
+			// buttonOK
+			// 
+			this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.buttonOK.Location = new System.Drawing.Point(255, 188);
+			this.buttonOK.Name = "buttonOK";
+			this.buttonOK.Size = new System.Drawing.Size(75, 23);
+			this.buttonOK.TabIndex = 7;
+			this.buttonOK.Text = "OK";
+			this.buttonOK.UseVisualStyleBackColor = true;
+			// 
+			// buttonCancel
+			// 
+			this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonCancel.Location = new System.Drawing.Point(350, 188);
+			this.buttonCancel.Name = "buttonCancel";
+			this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+			this.buttonCancel.TabIndex = 8;
+			this.buttonCancel.Text = "Cancel";
+			this.buttonCancel.UseVisualStyleBackColor = true;
 			// 
 			// AlarmDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(638, 502);
+			this.ClientSize = new System.Drawing.Size(518, 257);
+			this.Controls.Add(this.buttonCancel);
+			this.Controls.Add(this.buttonOK);
+			this.Controls.Add(this.buttonAdd);
+			this.Controls.Add(this.labelFileName);
 			this.Controls.Add(this.clbWeekDays);
 			this.Controls.Add(this.labelWeekdays);
 			this.Controls.Add(this.checkBoxUseDate);
 			this.Controls.Add(this.dtpTime);
 			this.Controls.Add(this.dtpDate);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "AlarmDialog";
 			this.Text = "AlarmDialog";
 			this.ResumeLayout(false);
@@ -118,5 +169,9 @@
 		private System.Windows.Forms.CheckBox checkBoxUseDate;
 		private System.Windows.Forms.Label labelWeekdays;
 		private System.Windows.Forms.CheckedListBox clbWeekDays;
+		private System.Windows.Forms.Label labelFileName;
+		private System.Windows.Forms.Button buttonAdd;
+		private System.Windows.Forms.Button buttonOK;
+		private System.Windows.Forms.Button buttonCancel;
 	}
 }
