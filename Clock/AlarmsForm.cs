@@ -23,5 +23,7 @@ namespace Clock
 		{
 			alarms.ShowDialog();
 		}
+
+		
 	}
 }

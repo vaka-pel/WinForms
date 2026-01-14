@@ -68,6 +68,10 @@ namespace Clock
 
 			writer.WriteLine(fontDialog.Filename);
 			writer.WriteLine(labelTime.Font.Size);
+			
+			
+
+			
 
 			writer.Close();
 
@@ -187,6 +191,7 @@ namespace Clock
 			if (result == DialogResult.OK)
 				labelTime.Font = fontDialog.Font;
 		}
+		
 
 		private void tsmiAutoStart_CheckedChanged(object sender, EventArgs e)
 		{
