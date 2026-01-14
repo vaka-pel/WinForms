@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.Win32;
+using System.Runtime.ExceptionServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Clock
 {
@@ -211,5 +213,15 @@ namespace Clock
 		{
 			alarms.ShowDialog();
 		}
+
+		private void tsmiShowConsole_CheckedChanged(object sender, EventArgs e)
+		{
+			if ((sender as ToolStripMenuItem).Checked) AllocConsole();
+			else FreeConsole();
+		}
+		[DllImport("kernel32.dll")]
+		public static extern void AllocConsole();
+		[DllImport("kernel32.dll")]
+		public static extern void FreeConsole();
 	}
 }

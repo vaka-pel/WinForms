@@ -12,16 +12,19 @@ namespace Clock
 {
 	public partial class AlarmsForm : Form
 	{
-		AlarmDialog alarms;
+		AlarmDialog alarm;
 		public AlarmsForm()
 		{
 			InitializeComponent();
-			alarms = new AlarmDialog();
+			alarm = new AlarmDialog();
 		}
 
 		private void buttonAdd_Click(object sender, EventArgs e)
 		{
-			alarms.ShowDialog();
+			if(alarm.ShowDialog()== DialogResult.OK)
+			{
+				listBoxAlarms.Items.Add(alarm.Alarm);
+			}
 		}
 
 		
