@@ -72,7 +72,6 @@
 			this.Name = "AlarmsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Alarms";
-			this.TopMost = true;
 			this.ResumeLayout(false);
 
 		}
